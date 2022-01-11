@@ -19,14 +19,13 @@ news
 
             <!-- если пользователь авторизован, то показываем форму подписки -->
             {% if request.user.is_authenticated %}
-            <form action="/subscription/" method="POST">
+            <form action="subscription/" method="POST">
                 {% csrf_token %}
                 <!-- передаём через скрытое поле id категории -->
                 <input type="hidden" name="cat_id" value="{{ cat.id }}">
                 <!-- если пользователя нет в категориях то отображаем кнопку Подписаться-->
                 {% if current_user not in cat.subscriptions.all %}
-<!--                <input type="submit" name="subscription_button" value="Подписаться">-->
-                <a href="{% url 'subscription' %}?cat_id={{ cat.id }}">Подписаться<br></a>
+                <input type="submit" name="subscription_button" value="Подписаться">
                 {% else %}
                 <!-- если пользователь есть в категориях то отображаем кнопку Отписаться-->
                 <input type="submit" name="unsubscription_button" value="Отписаться">
